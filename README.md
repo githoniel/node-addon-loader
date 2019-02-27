@@ -36,6 +36,14 @@ module.exports = {
 }
 ```
 
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|[**`name`**]|`{String}`|`[hash].[ext]`|ouput `*.node` file name|
+|[**`basePath`**]|`{String}`|`undefined`|relative path to project's outputPath|
+|[**`rewritePath`**]|`{String}`|`undefined`|rewrite url base path, if set, `basePath` is ignored|
+|[**`relativePath`**]|`{boolean}`|`false`|add `__dirname` to final `*.node` url|
+|[**`devServer`**]|`{boolean}`|`false`|set `true` to support devServer. if true,, `basePath`, `rewritePath`, `relativePath` is ignored|
+
 Note the `basePath` option: it will instruct the loader of the "base" path, from where the [node] runtime will be started. It will generate loading path relative to this URL.
 For example is you develop an [electron] app with a bundle emitted into `dist/` directory, you want all the required paths (emitted `require` statements) to be relative to the current directory of the [electron] runtime (they all will be like `dist/xxxx.node`).
 
