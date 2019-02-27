@@ -9,7 +9,8 @@ module.exports = function(content) {
     name: "[hash].[ext]",
     basePath: undefined,
     rewritePath: undefined,
-    relativePath: false
+    relativePath: false,
+    devServer: false,
   };
   // Parse query
   var query = loaderUtils.getOptions(this) || {};
@@ -22,6 +23,17 @@ module.exports = function(content) {
   Object.keys(query).forEach(function(attr) {
     config[attr] = query[attr];
   });
+
+  if (config.devServer) {
+    return (
+        "try { debugger;global.process.dlopen(module, " +
+        JSON.stringify(this.resourcePath) +
+        "); } catch(e) {" +
+        "throw new Error('Cannot open ' + " +
+        JSON.stringify(this.resourcePath) +
+        " + ': ' + e);}"
+    );
+  }
 
   // Build the output file name
   var url = loaderUtils.interpolateName(this, config.name, {
